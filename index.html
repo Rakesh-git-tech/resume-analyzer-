@@ -23,7 +23,7 @@
         #results-section {
             transition: opacity 0.5s ease-in-out;
         }
-        .keyword-pill {
+        .keyword-pill, .skill-pill {
             animation: fadeIn 0.5s ease-in-out forwards;
         }
         @keyframes fadeIn {
@@ -51,7 +51,6 @@
 
     <div class="container mx-auto px-4 py-8 md:py-12">
         
-        <!-- Header -->
         <header class="text-center mb-10">
             <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-2 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
                 CareerFit AI
@@ -59,10 +58,8 @@
             <p class="text-lg text-gray-400">Analyze your resume against a job description to get the job you deserve.</p>
         </header>
 
-        <!-- Main Interface -->
         <div class="max-w-4xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <!-- Step 1: Resume Upload -->
                 <div class="bg-gray-800 p-6 rounded-lg shadow-xl">
                     <h2 class="text-2xl font-bold text-white mb-4">Step 1: Your Resume</h2>
                     <label for="resume-upload" class="file-drop-area flex flex-col items-center justify-center p-8 rounded-md cursor-pointer hover:bg-gray-700/50">
@@ -74,14 +71,12 @@
                     <div id="file-name-display" class="text-center mt-3 text-gray-400 text-sm truncate"></div>
                 </div>
 
-                <!-- Step 2: Job Description -->
                 <div class="bg-gray-800 p-6 rounded-lg shadow-xl">
                     <h2 class="text-2xl font-bold text-white mb-4">Step 2: Job Description</h2>
                     <textarea id="job-description" rows="8" class="w-full bg-gray-900 border border-gray-700 rounded-md p-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Paste the full job description here..."></textarea>
                 </div>
             </div>
 
-            <!-- Analyze Button -->
             <div class="text-center">
                 <button id="analyze-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 text-lg shadow-lg disabled:bg-gray-500 disabled:cursor-not-allowed flex items-center justify-center mx-auto">
                     <span id="btn-text">Analyze Match</span>
@@ -90,27 +85,23 @@
             </div>
         </div>
 
-        <!-- Results Section (hidden initially) -->
         <div id="results-section" class="max-w-4xl mx-auto mt-12 bg-gray-800 p-8 rounded-lg shadow-2xl hidden opacity-0">
             <h2 class="text-3xl font-bold text-white text-center mb-6">Analysis Report</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <!-- Match Score -->
                 <div>
                     <h3 class="text-lg font-semibold text-gray-400 mb-2">Match Score</h3>
                     <div id="score-display" class="text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
                         --%
                     </div>
                 </div>
-                <!-- Keywords Found -->
                 <div>
                     <h3 class="text-lg font-semibold text-gray-400 mb-2">Keywords Found</h3>
                     <div id="keywords-found" class="text-6xl font-extrabold text-white">
                         --
                     </div>
                 </div>
-                <!-- Missing Keywords -->
-                 <div>
+                <div>
                     <h3 class="text-lg font-semibold text-gray-400 mb-2">Crucial Keywords Missing</h3>
                     <div id="keywords-missing-count" class="text-6xl font-extrabold text-amber-400">
                         --
@@ -120,23 +111,35 @@
 
             <hr class="border-gray-700 my-8">
 
-            <!-- Keyword Details -->
             <div>
                 <h3 class="text-xl font-bold text-white mb-4">Keyword Analysis</h3>
                 <p class="text-gray-400 mb-4">These are the most important keywords from the job description. The ones highlighted are missing from your resume.</p>
                 <div id="keyword-pills-container" class="flex flex-wrap gap-3">
-                    <!-- Keyword pills will be injected here by JS -->
-                </div>
+                    </div>
             </div>
 
              <hr class="border-gray-700 my-8">
              
-            <!-- Suggestions -->
             <div>
                  <h3 class="text-xl font-bold text-white mb-4">Suggestions for Improvement</h3>
                  <div id="suggestions-list" class="text-gray-300 space-y-3">
-                    <!-- Suggestions will be injected here -->
-                 </div>
+                    </div>
+            </div>
+
+            <hr class="border-gray-700 my-8">
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4">Additional Recommended Skills</h3>
+                <p class="text-gray-400 mb-4">Based on the job title, here are other skills recruiters often look for. Consider adding them if you have experience.</p>
+                <div id="additional-skills-container" class="flex flex-wrap gap-3">
+                    </div>
+            </div>
+            
+            <hr class="border-gray-700 my-8">
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4">Learning Resources to Fill the Gaps</h3>
+                <p class="text-gray-400 mb-4">Here are some resources to help you learn the crucial skills you're missing.</p>
+                <div id="learning-resources-container" class="space-y-3">
+                    </div>
             </div>
         </div>
     </div>
@@ -221,6 +224,13 @@
                     "Add specific projects where you used SQL to manage databases.",
                     "Incorporate the phrase 'Data Analysis' in your skills section or a project description.",
                     "Mention your familiarity with 'Agile' methodologies to show you can work in modern dev environments."
+                ],
+                // NEW MOCK DATA
+                additionalSkills: [ 'Docker', 'Kubernetes', 'CI/CD Pipelines', 'Testing Frameworks' ],
+                learningResources: [
+                    { skill: 'SQL', link: 'https://www.w3schools.com/sql/', description: 'A foundational language for database management.' },
+                    { skill: 'AWS', link: 'https://aws.amazon.com/training/', description: 'The leading cloud platform for services and infrastructure.' },
+                    { skill: 'Machine Learning', link: 'https://www.coursera.org/learn/machine-learning', description: 'A popular introductory course by Andrew Ng.' }
                 ]
             };
             
@@ -237,6 +247,7 @@
         document.getElementById('keywords-found').textContent = data.keywordsFound;
         document.getElementById('keywords-missing-count').textContent = data.keywordsMissingCount;
 
+        // Populate Keyword Analysis
         const keywordContainer = document.getElementById('keyword-pills-container');
         keywordContainer.innerHTML = ''; // Clear old pills
         data.keywordAnalysis.forEach(item => {
@@ -247,6 +258,7 @@
             keywordContainer.innerHTML += pill;
         });
         
+        // Populate Suggestions
         const suggestionsContainer = document.getElementById('suggestions-list');
         suggestionsContainer.innerHTML = '';
         data.suggestions.forEach(suggestion => {
@@ -258,9 +270,32 @@
             `;
             suggestionsContainer.innerHTML += suggestionItem;
         });
+
+        // NEW: Populate Additional Recommended Skills
+        const additionalSkillsContainer = document.getElementById('additional-skills-container');
+        additionalSkillsContainer.innerHTML = ''; // Clear old pills
+        data.additionalSkills.forEach(skill => {
+            const pill = `<span class="skill-pill bg-gray-700 text-gray-300 text-sm font-medium px-3 py-1 rounded-full">${skill}</span>`;
+            additionalSkillsContainer.innerHTML += pill;
+        });
+
+        // NEW: Populate Learning Resources
+        const learningResourcesContainer = document.getElementById('learning-resources-container');
+        learningResourcesContainer.innerHTML = '';
+        data.learningResources.forEach(resource => {
+            const resourceItem = `
+                <a href="${resource.link}" target="_blank" rel="noopener noreferrer" class="flex items-center p-3 bg-gray-900/50 rounded-lg hover:bg-gray-700/50 transition-colors duration-200">
+                    <svg class="w-6 h-6 text-purple-400 mr-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                    <div>
+                        <p class="font-semibold text-white">${resource.skill}</p>
+                        <p class="text-sm text-gray-400">${resource.description}</p>
+                    </div>
+                </a>
+            `;
+            learningResourcesContainer.innerHTML += resourceItem;
+        });
     }
 
 </script>
 </body>
 </html>
-
